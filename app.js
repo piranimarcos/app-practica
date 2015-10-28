@@ -11,12 +11,19 @@ var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var users = require('./routes/user');
+//orm mongoose
+var mongoose = require('mongoose');
+var fixtures = require('mongoose-fixtures');
 
 var app = express();
 
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
+
+mongoose.connect('mongodb://localhost/crudtest');
+
+fixtures.load('./fixtures/persons.js');
 
 var app = exports.app = express(); // para poder leer las variables de app.js desde /routes/main.js
 
@@ -41,10 +48,7 @@ app.use('/users', users);
 
 require('./routes/main.js');
 
-//orm mongoose
-var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/crudtest');
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

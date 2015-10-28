@@ -13,6 +13,7 @@
     "express-session": "^1.12.0",
     "jade": "^1.11.0",
     "mongoose": "^4.2.2",
+    "mongoose-fixtures": "0.0.1",
     "morgan": "^1.6.1",
     "serve-favicon": "^2.3.0"
   },
