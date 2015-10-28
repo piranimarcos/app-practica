@@ -1,10 +1,24 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var crypto = require('crypto');
 
 var adminSchema = new Schema({
     email: String,
     password: String
 });
+
+/*
+  Pre-Save Hook
+  http://mongoosejs.com/docs/api.html#schema_Schema-pre
+*/
+
+adminSchema.pre("save", function(next) {
+    if(this.isModified('password'))
+        this.password = crypto.createHash('sha1').update(this.password).digest("hex");
+    next();
+});
+
+var adminModel = mongoose.model('Admins', adminSchema);
 
 var adminModel = mongoose.model('Admins', adminSchema);
 
