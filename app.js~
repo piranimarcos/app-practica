@@ -41,7 +41,6 @@ app.use('/users', users);
 
 require('./routes/main.js');
 
-//Extra, manejo de excepciones globales
 process.on('uncaughtException', function(err) {
   console.log('Caught exception: ' + err);
 });
